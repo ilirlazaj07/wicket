@@ -1,6 +1,7 @@
 package it.senseisrl.wicketapp;
 
 import it.senseisrl.entities.Istanza;
+import javax.servlet.http.HttpSession;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
@@ -9,6 +10,8 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.protocol.http.servlet.ServletWebRequest;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 /**
  *
@@ -54,6 +57,10 @@ public class HomePage extends WebPage {
                 String username1 = username.getModelObject().toString();
                 System.out.println(username1);
                 if (username1.equals("admin")) {
+                    HttpSession session = ((ServletWebRequest) RequestCycle.get()
+                    .getRequest()).getContainerRequest().getSession();
+                    session.setAttribute("atr", ";)");
+                    System.out.println(session.getAttribute("atr"));
                     this.setResponsePage(Ereditata.class);
                 }
             }
